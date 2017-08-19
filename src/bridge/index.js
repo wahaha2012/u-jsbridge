@@ -66,7 +66,7 @@ const jsBridge = {
     if (typeof eventMap[eventName] === 'function') {
       eventMap[eventName](data);
       // eventMap[eventName] = null;
-      delete eventMap[eventName];
+      // delete eventMap[eventName];
     }
   }
 };
