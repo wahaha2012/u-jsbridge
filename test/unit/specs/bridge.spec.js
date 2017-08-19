@@ -1,16 +1,22 @@
-import jsBridge from '../../../src/bridge/';
+import JsBridge from '../../../src/bridge/';
 
 describe('jsBridge.js', () => {
+  it('should set debugger mode successfully', () => {
+    spyOn(console, 'log');
+    JsBridge.setDebuggerMode(true);
+    expect(console.log).toHaveBeenCalledWith('debuggerMode on');
+  });
+
   it('should get platform successfully', () => {
     spyOn(console, 'log');
-    const platform = jsBridge.getSysPlatform();
+    const platform = JsBridge.getSysPlatform();
     expect(console.log).toHaveBeenCalledWith(platform);
   });
 
   it('should call bridge successfully', () => {
     spyOn(console, 'log');
 
-    jsBridge.call('unitTest', (data) => {
+    JsBridge.call('unitTest', (data) => {
       console.log(data);
     });
 
@@ -20,7 +26,7 @@ describe('jsBridge.js', () => {
   it('should emit event and run callback functions', () => {
     spyOn(console, 'log');
 
-    jsBridge.emit('unitTest', {'log': true});
+    JsBridge.emit('unitTest', {'log': true});
 
     expect(console.log).toHaveBeenCalledWith({'log': true});
   });
@@ -28,7 +34,7 @@ describe('jsBridge.js', () => {
   it('should register bridge successfully', () => {
     spyOn(console, 'log');
 
-    jsBridge.register('registerTest', (data) => {
+    JsBridge.register('registerTest', (data) => {
       console.log(data);
     });
 
@@ -37,7 +43,7 @@ describe('jsBridge.js', () => {
 
   it('should call window.onNativeCallback and emit event', () => {
     spyOn(console, 'log');
-    spyOn(jsBridge, 'emit');
+    spyOn(JsBridge, 'emit');
 
     const message = {
       msgType: 'registerTest',
@@ -47,7 +53,7 @@ describe('jsBridge.js', () => {
     };
     window.onNativeCallback(message);
 
-    expect(jsBridge.emit).toHaveBeenCalled();
+    expect(JsBridge.emit).toHaveBeenCalled();
     expect(console.log).toHaveBeenCalledWith(message);
   });
 });

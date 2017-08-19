@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import jsBridge from '@/bridge/';
+import JsBridge from '@/bridge/';
 
 export default {
   name: 'hello',
@@ -20,15 +20,18 @@ export default {
       registerStatus: ''
     };
   },
+  mounted() {
+    JsBridge.setDebuggerMode(true);
+  },
   methods: {
     register() {
-      jsBridge.call('helloWorld', (data) => {
+      JsBridge.call('helloWorld', (data) => {
         this.updateMsg(data);
       });
       this.updateEventStatus();
     },
     emit() {
-      jsBridge.emit('helloWorld', {
+      JsBridge.emit('helloWorld', {
         hello: 'bridge world'
       });
     },

@@ -43,9 +43,16 @@ jsBridge.emit('testMessage', {
 });
 ```
 
+> switch debugger mode status
+
+```js
+jsBridge.setDebuggerMode(true);
+```
+
 # API
 ```js
 jsBridge
+- setDebuggerMode(boolean[default: false]) 
 - call(bridgeName, [callBack])
 - register(bridgeName, callback)
 - emit(bridgeName, response)

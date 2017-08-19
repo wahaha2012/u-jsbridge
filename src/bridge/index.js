@@ -1,4 +1,5 @@
 const eventMap = {};
+let debuggerMode = false;
 
 window.onNativeCallback = (message) => {
   if (typeof message === 'string') {
@@ -10,13 +11,19 @@ window.onNativeCallback = (message) => {
   }
   // receive message from native
   if (typeof message === 'object') {
-    console.log(message);
+    debuggerMode && console.log(message);
     jsBridge.emit(message.msgType, message.data);
   }
 
 };
 
 const jsBridge = {
+  setDebuggerMode(status) {
+    debuggerMode = status;
+
+    debuggerMode && console.log('debuggerMode on');
+  },
+
   getSysPlatform() {
     const ua = window.navigator.userAgent;
     const uaL = ua.toLowerCase();
@@ -28,7 +35,7 @@ const jsBridge = {
       platform = 'android';
     }
 
-    console.log(platform);
+    debuggerMode && console.log(platform);
     return platform;
   },
 
@@ -54,12 +61,12 @@ const jsBridge = {
 
     jsBridge.register(eventName, func);
 
-    console.log(eventName);
+    debuggerMode && console.log(eventName);
   },
 
   register(eventName, func) {
     eventMap[eventName] = func;
-    console.log(typeof eventMap[eventName]);
+    debuggerMode && console.log(typeof eventMap[eventName]);
   },
 
   emit(eventName, data) {
