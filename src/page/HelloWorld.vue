@@ -38,7 +38,7 @@ export default {
     },
     updateMsg(data) {
       console.log('bridge data:', data);
-      this.registerStatus = 'event unregistered';
+      // this.registerStatus = 'event unregistered';
       this.emitMsg = data;
 
       setTimeout(()=>{
