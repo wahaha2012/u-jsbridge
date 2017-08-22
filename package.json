@@ -1,8 +1,8 @@
 {
   "name": "u-jsbridge",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "app js bridge",
-  "main": "src/bridge",
+  "main": "dist/bridge",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node build/dev-server.js",

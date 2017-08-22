@@ -82,3 +82,4 @@ var jsBridge = {
 };
 
 exports.default = jsBridge;
+module.exports = exports['default'];
