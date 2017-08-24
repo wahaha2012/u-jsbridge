@@ -44,10 +44,17 @@ var jsBridge = {
     debuggerMode && console.log(platform);
     return platform;
   },
-  call: function call(eventName, func) {
+  call: function call(eventName, data, func) {
     var jsonObj = {
       'msgType': eventName
     };
+
+    if (typeof data === 'function') {
+      func = data;
+    } else if (typeof data !== 'undefined') {
+      jsonObj.data = data;
+    }
+
     var platform = jsBridge.getSysPlatform();
 
     try {

@@ -39,10 +39,17 @@ const jsBridge = {
     return platform;
   },
 
-  call(eventName, func) {
+  call(eventName, data, func) {
     const jsonObj = {
       'msgType': eventName
     };
+
+    if (typeof data === 'function') {
+      func = data;
+    } else if (typeof data !== 'undefined') {
+      jsonObj.data = data;
+    }
+    
     const platform = jsBridge.getSysPlatform();
     
     try {
