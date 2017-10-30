@@ -20,6 +20,11 @@ import jsBridge from 'u-jsbridge';
 jsBridge.call('testMessage', (response) => {
   // here process response data from native app
 });
+
+// call bridge with data
+jsBridge.call('testMessage', { userName: 'tom' }, (response) => {
+  // here process response data from native app
+});
 ```
 
 
@@ -53,7 +58,7 @@ jsBridge.setDebuggerMode(true);
 ```js
 jsBridge
 - setDebuggerMode(boolean[default: false]) 
-- call(bridgeName, [callBack])
+- call(bridgeName, [data], [callBack])
 - register(bridgeName, callback)
 - emit(bridgeName, response)
 ```
